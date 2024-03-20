@@ -22,6 +22,7 @@ app.set('view engine', 'ejs');
 
 app.get('/', (req,res) => {
     const title = req.query.title as string;
+    console.log(`Title: ${title}`); 
     res.render('index', {title: 'Home'})
 })
 app.use(express.json())
