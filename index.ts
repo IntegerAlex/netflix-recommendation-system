@@ -21,7 +21,7 @@ const app = express();
 app.set('view engine', 'ejs');
 
 app.get('/', (req,res) => {
-
+    const title = req.query.title as string;
     res.render('index', {title: 'Home'})
 })
 app.use(express.json())
