@@ -1,5 +1,6 @@
 import { exec } from 'child_process';
 import { join } from 'path';
+import axios from 'axios';
 
 const scriptPath = join(__dirname, 'script.py');
 
@@ -57,3 +58,35 @@ export async function recommendation(movieName: string): Promise<string> {
 //     .catch((error) => {
 //         console.error("An error occurred:", error);
 //     });
+
+
+async function searchMovieId(movieName:string) {
+    try {
+        // Send a GET request to search for the movie by name
+        const response = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.TMDB_API_KEY}&query=${encodeURIComponent(movieName)}`);
+        
+        // Check if any results were returned
+        if (response.data.results.length > 0) {
+            // Return the ID of the first result
+            axios.get(`https://api.themoviedb.org/3/movie/${response.data.results[0].id}?api_key=${process.env.TMDB_API_KEY}`).
+            then((response) => {    
+                console.log(response.data);
+            })
+            return response.data.results[0].id;
+        } else {
+            throw new Error('Movie not found');
+        }
+    } catch (error:any) {
+        console.error('Error searching movie:', error.message);
+        throw error;
+    }
+}
+
+export async function displayRecommendations(jsonOutput:any) {
+    // Get the ID of the first movie in the recommendations
+    for (let i = 0; i < jsonOutput.recommendations.length; i++) {
+        const movieId = await searchMovieId(jsonOutput.recommendations[i].title);
+        console.log(`Movie ID: ${movieId}`);
+    }
+
+}

@@ -1,13 +1,28 @@
 import * as express from 'express';
 import { recommendation } from './helper';
-import axios from 'axios';
+import { displayRecommendations } from './helper';
+// import axios from 'axios';
+import * as dotenv from 'dotenv';
+dotenv.config();
+
 // import { title } from 'process';
 const app = express();
 
+// app.use((req, res, next) => {
+//     // Check if the request is coming from the backend
+//     const allowedOrigins = ['http://localhost:3000']; // Add more origins if needed
+//     const origin = req.headers.origin;
+//     if (allowedOrigins.includes(origin)) {
+//         res.setHeader('Access-Control-Allow-Origin', origin);
+//     }
+//     next();
+// });
+
+app.set('view engine', 'ejs');
 
 app.get('/', (req,res) => {
-  
-    res.sendFile(__dirname + '/index.html');
+
+    res.render('index', {title: 'Home'})
 })
 app.use(express.json())
 // app.use(body-parcer)
@@ -26,6 +41,7 @@ app.get('/recommendation', (req, res) => {
             console.log("Recommendations:");
             console.log(jsonOutput);
             res.send(jsonOutput);
+            displayRecommendations(jsonOutput);
         })
         .catch((error) => {
             console.error("An error occurred:", error);
@@ -33,6 +49,10 @@ app.get('/recommendation', (req, res) => {
         });
 })
 
+// app.get('/test', (req, res) => {
+//     // req.res.render('test')
+//     res.render('test')
+// })
 
 app.listen(3000, () => {    
     console.log('Server is running on port 3000');
@@ -40,33 +60,13 @@ app.listen(3000, () => {
 
 
 
-async function searchMovieId(movieName:string) {
-    try {
-        // Send a GET request to search for the movie by name
-        const response = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.TMDB_API_KEY}&query=${encodeURIComponent(movieName)}`);
-        
-        // Check if any results were returned
-        if (response.data.results.length > 0) {
-            // Return the ID of the first result
-            axios.get(`https://api.themoviedb.org/3/movie/${response.data.results[0].id}?api_key=${process.env.TMDB_API_KEY}`).
-            then((response) => {    
-                console.log(response.data);
-            })
-            return response.data.results[0].id;
-        } else {
-            throw new Error('Movie not found');
-        }
-    } catch (error:any) {
-        console.error('Error searching movie:', error.message);
-        throw error;
-    }
-}
+
 
 // Usage example
-searchMovieId('The Matrix')
-    .then(movieId => {
-        console.log('Movie ID:', movieId);
-    })
-    .catch(error => {
-        console.error('An error occurred:', error);
-    });
+// searchMovieId('The Matrix')
+//     .then(movieId => {
+//         console.log('Movie ID:', movieId);
+//     })
+//     .catch(error => {
+//         console.error('An error occurred:', error);
+//     });
