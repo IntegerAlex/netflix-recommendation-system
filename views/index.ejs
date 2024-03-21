@@ -4,23 +4,101 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Searchable Dropdown</title>
-<link rel="stylesheet" href="/views/style.cssf vd ">
+<style>
+body {
+    background-image: url('/public/Designer.png'); /* Adjust the path to your background image */
+    background-size: cover; /* Cover the entire background */
+    background-position: center; /* Center the background image */
+    background-attachment: fixed; /* Fix the background image so it doesn't scroll with the content */
+    font-family: Arial, sans-serif; /* Set the font family */
+}
+
+/* Custom CSS styles */
+.dropdown {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin: 100px auto; /* Center horizontally and add top margin */
+  width: 300px; 
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Ensure that padding and border are included in the width */
+    font-size: 16px; /* Set the font size */
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    width: 100%;
+    z-index: 1;
+    max-height: 200px;
+    overflow-y: auto;
+    margin-top: 5px; /* Add some margin to separate from the input */
+}
+
+.dropdown-content.show {
+    display: block;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+    transition: background-color 0.3s;
+}
+
+.dropdown-content a:hover {
+    background-color: #e9e9e9;
+}
+
+.btn-recommend {
+  position:relative;
+  display: flex;
+  justify-content: center;
+  margin: 100px auto;
+  width: 300px;
+    padding: 10px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-recommend:hover {
+    background-color: #0056b3;
+}
+
+</style>
 </head>
 <body>
 
 <div class="dropdown">
   <input type="text" placeholder="Search.." class="search-input">
   <div class="dropdown-content">
-    <a href="#">Option 1</a>
-    <a href="#">Option 2</a>
-    <a href="#">Option 3</a>
-    <a href="#">Option 4</a>
-    <a href="#">Option 5</a>
+    <% titles.forEach(function(title) { %>
+      <a href="#"><%= title %></a>
+    <% }); %>
   </div>
+  
 </div>
+<button class="btn-recommend">Recommend</button>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>$(document).ready(function(){
+<script>
+$(document).ready(function(){
+  // Search functionality
   $('.search-input').keyup(function(){
     var searchText = $(this).val().toLowerCase();
     $('.dropdown-content a').each(function(){
@@ -34,12 +112,39 @@
     $('.dropdown-content').addClass('show');
   });
   
+  // Handle click on dropdown option
   $('.dropdown-content a').click(function(e){
     e.preventDefault();
     $('.search-input').val($(this).text());
     $('.dropdown-content').removeClass('show');
   });
   
+  // Handle click on Recommend button
+  $('.btn-recommend').click(function() {
+    var selectedTitle = $('.search-input').val();
+    // Check if the selected title exists in the titles list
+    if (titles.includes(selectedTitle)) {
+      // Make API call
+      // Replace 'your-api-endpoint' with your actual API endpoint
+      $.ajax({
+        url: '/zrecommendation',
+        type: 'POST',
+        data: { title: selectedTitle },
+        success: function(response) {
+          console.log('API call successful:', response);
+          // Add code to handle successful API response
+        },
+        error: function(xhr, status, error) {
+          console.error('Error making API call:', error);
+          // Add code to handle error
+        }
+      });
+    } else {
+      console.log('Selected title not found in the list.');
+    }
+  });
+  
+  // Close dropdown when clicked outside
   $(document).click(function(e) {
     if (!$(e.target).closest('.dropdown').length) {
       $('.dropdown-content').removeClass('show');

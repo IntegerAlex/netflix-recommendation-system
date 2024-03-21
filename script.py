@@ -25,7 +25,7 @@ def get_recommendations(movie_name, cosine_sim, netflix_data):
     idx = indices[title]
     sim_scores = list(enumerate(cosine_sim[idx]))
     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
-    sim_scores = sim_scores[1:11]  # Exclude the movie itself
+    sim_scores = sim_scores[1:9]  # Exclude the movie itself
     movie_indices = [i[0] for i in sim_scores]
     result = netflix_data['title'].iloc[movie_indices].tolist()
     return result

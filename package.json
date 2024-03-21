@@ -2,9 +2,9 @@
   "name": "netflix-recommendation",
   "private": true,
   "version": "0.0.0",
+  
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc",
     "preview": "vite preview"
   },
   "devDependencies": {
