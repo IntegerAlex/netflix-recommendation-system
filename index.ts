@@ -34,6 +34,8 @@ app.set('view engine', 'ejs');
 
 
 app.get('/', (req, res) => {
+    const title = req.query.title as string;
+    console.log(`Title: ${title}`);
     // Read the titles.json file
     fs.readFile('titles.json', 'utf8', (err, data) => {
         if (err) {
