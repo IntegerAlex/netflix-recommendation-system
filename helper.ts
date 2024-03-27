@@ -53,7 +53,7 @@ async function searchMovie(movieName: string): Promise<MovieDetails> {
 
     try {
         // Send a GET request to search for the movie by name
-        const response: AxiosResponse<any> = await axios.get(`https://www.omdbapi.com/?t=${encodedMovieName}&apikey=${omdbApiKey}`);
+        const response: AxiosResponse = await axios.get(`https://www.omdbapi.com/?t=${encodedMovieName}&apikey=${omdbApiKey}`);
         
         // Check if the response status is OK (200)
         if (response.status === 200 && response.data.Response === 'True') {
