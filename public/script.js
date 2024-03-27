@@ -39,23 +39,11 @@ initializeSearchFunctionality();
 document.getElementById("recommend-btn").addEventListener("click", recommend);
 
 async function recommend() {
-
     document.getElementById("recommend-btn").textContent = 'Loading...';
     document.getElementById("recommend-btn").disabled = true;
     const movieName = document.querySelector('.search-input').value.trim(); // Trim whitespace from movie name
     if (movieName) { // Check if movie name is not empty
-        const response = await fetch('/recommendation', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ movieName: movieName })
-        });
-        const data = await response.json();
-        console.log(data);
-        // Add code to handle successful API response
-        // document.querySelector('.recommendation').textContent = data.recommendation;
-
+        window.location.href = `/recommendation?movieName=${encodeURIComponent(movieName)}`;
     } else {
         console.log('Please enter a movie name.');
     }
