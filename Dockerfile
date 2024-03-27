@@ -1,28 +1,39 @@
+FROM node:20-bookworm-slim
+# Install dependencies for both Node.js and Python
+RUN apt-get update && \
+apt-get install -y \
+python3 \
+python3-venv \
+python3-dev \
+gcc \
+g++ \
+make \
+nodejs
 
-FROM node:latest AS build
-
-ENV NODE_ENV=production
-ENV PORT=3000
-
-RUN apt-get update && apt-get install -y python3 python3-venv
-
+# Set working directory
 WORKDIR /app
 
+# Copy Node.js dependencies and install
 COPY package*.json ./
+RUN npm install --quiet --no-progress --no-fund --audit=false --unsafe-perm
 
-RUN npm install
-
+# Copy application files
 COPY . .
 
-FROM node:slim
+# TypeScript compilation
+RUN npx tsc index.ts helper.ts
 
-ENV NODE_ENV=production
-ENV PORT=3000
+# Create and activate Python virtual environment
+RUN python3 -m venv /venv
+# Install Python dependencies
+RUN /bin/bash -c "source /venv/bin/activate \
+    && pip install --no-cache-dir pandas scikit-learn" 
 
-WORKDIR /app
+# Expose port
+EXPOSE 8080
 
-COPY --from=build /app .
+# Set environment variable
+ENV OMDB_API_KEY=
 
-EXPOSE $PORT
-
-CMD ["node", "app.js"]
+# Command to start the Node.js application
+CMD ["node", "index.js"]

@@ -19,6 +19,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
     
+    
   },
   "include": ["src" , "index.ts","helper.ts"],
 }

@@ -8,7 +8,7 @@ const scriptPath = join(__dirname, 'script.py');
 export async function recommendation(movieName: string): Promise<string[]> {
     return new Promise((resolve, reject) => {
         // Execute the Python script
-        exec(`python3 ${scriptPath} "${movieName}"`, (error, stdout: string, stderr: string) => {
+        exec(`/venv/bin/python3 ${scriptPath} "${movieName}"`, (error, stdout: string, stderr: string) => {
             if (error) {
                 console.error(`Error executing script: ${error.message}`);
                 reject([]);
@@ -71,7 +71,15 @@ async function searchMovie(movieName: string): Promise<MovieDetails> {
         }
     } catch (error:any) {
         // Handle errors
-        throw new Error(`Error searching movie "${movieName}": ${error.message}`);
+        const movieDetails: MovieDetails = {
+            poster: "",
+            title: movieName,
+            year: "",
+            genre: "",
+            rating: "",
+        };
+        return movieDetails;
+        // throw new Error(`Error searching movie "${movieName}": ${error.message}`);
     }
 }
 
