@@ -74,7 +74,10 @@ async function searchMovieId(movieName:string) {
             })
             return response.data.results[0].id;
         } else {
-            throw new Error('Movie not found');
+            // If no results were found, throw an error
+            
+            return new Error('Movie not found');
+            
         }
     } catch (error:any) {
         console.error('Error searching movie:', error.message);
@@ -89,4 +92,5 @@ export async function displayRecommendations(jsonOutput:any) {
         console.log(`Movie ID: ${movieId}`);
     }
 
+    
 }

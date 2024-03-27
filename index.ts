@@ -31,11 +31,14 @@ app.get('/public/:image', (req, res) => {
 
 app.set('view engine', 'ejs');
 
+app.use(express.static( 'public'));
 
 
 app.get('/', (req, res) => {
-    const title = req.query.title as string;
-    console.log(`Title: ${title}`);
+
+    const forwardedFor = req.headers['x-forwarded-for'];
+    const ip = forwardedFor ? (forwardedFor as string).split(',')[0] : req.socket.remoteAddress;
+    console.log(`Request from IP: ${ip}`);
     // Read the titles.json file
     fs.readFile('titles.json', 'utf8', (err, data) => {
         if (err) {
@@ -54,7 +57,7 @@ app.get('/', (req, res) => {
 app.use(express.json())
 // app.use(body-parcer)
 
-app.get('/recommendation', (req, res) => {
+app.post('/recommendation', (req, res) => {
     // const movieName = req.query.movieName as string;
     const movieName = req.body.movieName as string;
     console.log(`Movie name: ${movieName}`);
