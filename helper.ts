@@ -57,6 +57,7 @@ async function searchMovie(movieName: string): Promise<MovieDetails> {
         if (response.data.Response === 'True') {
             // Extract relevant movie details
             const movieDetails: MovieDetails = {
+                poster: response.data.Poster,
                 title: response.data.Title,
                 year: response.data.Year,
                 genre: response.data.Genre,
@@ -75,6 +76,7 @@ async function searchMovie(movieName: string): Promise<MovieDetails> {
 }
 
 interface MovieDetails {
+    poster: string;
     title: string;
     year: string;
     genre: string;
