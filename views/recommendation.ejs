@@ -12,14 +12,15 @@
     <div class="container">
         <% details.forEach(movie => { %>
             <div class="card">
-                <h2 class="title"><%= movie.title %></h2>
-                <p class="info">Year: <%= movie.year %></p>
-                <p class="info">Genre: <%= movie.genre %></p>
-                <p class="info">Rating: <%= movie.rating %></p>
+                <img src="<%= movie.poster %>" alt="poster" class="poster">
+                <div class="content">
+                    <h2 class="title"><%= movie.title %></h2>
+                    <p class="info">Year: <%= movie.year %></p>
+                    <p class="info">Genre: <%= movie.genre %></p>
+                    <p class="info">Rating: <%= movie.rating %></p>
+                </div>
             </div>
         <% }); %>
     </div>
-
-    <!-- <script src="/public/script.js" async defer></script> -->
 </body>
 </html>
