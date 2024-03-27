@@ -50,16 +50,16 @@ app.get('/', (req, res) => {
         // Parse the JSON data
         const titlesData = JSON.parse(data);
 
-        // Render the EJS template and pass the titles data
+        // Render the EJS template and pass the titles dataset
         res.render('index', { titles: titlesData.titles });
     });
 });
 app.use(express.json())
 // app.use(body-parcer)
 
-app.post('/recommendation', (req, res) => {
-    // const movieName = req.query.movieName as string;
-    const movieName = req.body.movieName as string;
+app.get('/recommendation', (req, res) => {
+    const movieName = req.query.movieName as string;
+    // const movieName = req.body.movieName as string;
     console.log(`Movie name: ${movieName}`);
 
     // Import the recommendation function from helper.ts
@@ -67,36 +67,38 @@ app.post('/recommendation', (req, res) => {
     
     // Call the recommendation function
     recommendation(movieName)
-        .then((jsonOutput) => {
-            console.log("Recommendations:");
-            console.log(jsonOutput);
-            res.send(jsonOutput);
-            displayRecommendations(jsonOutput);
-        })
-        .catch((error) => {
-            console.error("An error occurred:", error);
-            res.send("An error occurred");
-        });
+    .then((jsonOutput) => {
+        // console.log("Recommendations:");
+        // console.log(jsonOutput);
+        // Call displayRecommendations and return its promise
+        return displayRecommendations(jsonOutput);
+    })
+    .then((details) => {
+        // Render the recommendation.ejs template with the details
+        res.render('recommendation', { details: details });
+    })
+    .catch((error) => {
+        console.error("An error occurred:", error);
+        res.send("An error occurred");
+    });
+
 })
 
-// app.get('/test', (req, res) => {
-//     // req.res.render('test')
-//     res.render('test')
-// })
+
 
 app.listen(3000, () => {    
     console.log('Server is running on port 3000');
 });
 
 
+// app.get('/test', (req, res) => {
+//     res.render('recommendation', { details: [
+//         {
+//             title: 'The Shawshank Redemption',
+//             year: '1994',
+//             genre: 'Drama',
+//             recommendation: '9.3'
 
-
-
-// Usage example
-// searchMovieId('The Matrix')
-//     .then(movieId => {
-//         console.log('Movie ID:', movieId);
-//     })
-//     .catch(error => {
-//         console.error('An error occurred:', error);
-//     });
+//         }
+//     ] });
+// })

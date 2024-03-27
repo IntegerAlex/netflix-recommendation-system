@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Recommendations</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/public/recommendation.css">
+</head>
+<body>
+    <div class="container">
+        <% details.forEach(movie => { %>
+            <div class="card">
+                <h2 class="title"><%= movie.title %></h2>
+                <p class="info">Year: <%= movie.year %></p>
+                <p class="info">Genre: <%= movie.genre %></p>
+                <p class="info">Rating: <%= movie.rating %></p>
+            </div>
+        <% }); %>
+    </div>
+
+    <!-- <script src="/public/script.js" async defer></script> -->
+</body>
+</html>
