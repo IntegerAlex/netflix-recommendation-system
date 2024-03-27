@@ -11,7 +11,7 @@ args = parser.parse_args()
 
 # Function to clean data
 def clean_data(x):
-    return str.lower(x.replace(" ", ""))
+    return str.lower(x.replace(" ", " "))
 
 # Function to create a combined feature
 def create_soup(x):
