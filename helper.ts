@@ -1,6 +1,6 @@
 import { exec } from 'child_process';
 import { join } from 'path';
-import axios from 'axios';
+import axios ,{AxiosResponse} from 'axios';
 
 const scriptPath = join(__dirname, 'script.py');
 
@@ -47,14 +47,16 @@ export async function displayRecommendations(moviesArray: string[]){
         return [];
     }
 }
-
 async function searchMovie(movieName: string): Promise<MovieDetails> {
+    const omdbApiKey = process.env.OMDB_API_KEY;
+    const encodedMovieName = encodeURIComponent(movieName);
+
     try {
         // Send a GET request to search for the movie by name
-        const response = await axios.get(`https://www.omdbapi.com/?t=${encodeURIComponent(movieName)}&apikey=${process.env.OMDB_API_KEY}`);
+        const response: AxiosResponse<any> = await axios.get(`https://www.omdbapi.com/?t=${encodedMovieName}&apikey=${omdbApiKey}`);
         
-        // Check if any results were returned
-        if (response.data.Response === 'True') {
+        // Check if the response status is OK (200)
+        if (response.status === 200 && response.data.Response === 'True') {
             // Extract relevant movie details
             const movieDetails: MovieDetails = {
                 poster: response.data.Poster,
@@ -66,11 +68,19 @@ async function searchMovie(movieName: string): Promise<MovieDetails> {
             // Return the movie details
             return movieDetails;
         } else {
-            // If no results were found, throw an error
-            throw new Error('Movie not found');
+            console.error(`Error searching movie "${movieName}": `);
+            const movieDetails: MovieDetails = {
+                poster: "",
+                title: movieName,
+                year: "",
+                genre: "",
+                rating: "",
+            };
+            return movieDetails;
         }
     } catch (error:any) {
         // Handle errors
+        console.error(`Error searching movie "${movieName}": ${error.message}`);
         const movieDetails: MovieDetails = {
             poster: "",
             title: movieName,
@@ -79,10 +89,8 @@ async function searchMovie(movieName: string): Promise<MovieDetails> {
             rating: "",
         };
         return movieDetails;
-        // throw new Error(`Error searching movie "${movieName}": ${error.message}`);
     }
 }
-
 interface MovieDetails {
     poster: string;
     title: string;
