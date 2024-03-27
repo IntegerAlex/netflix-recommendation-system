@@ -5,7 +5,8 @@
   
   "scripts": {
     "build": "tsc",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "dev":"tsc index.ts helper.ts && node index.js"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",
