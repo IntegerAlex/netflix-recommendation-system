@@ -2,6 +2,7 @@ import * as express from 'express';
 import { recommendation } from './helper';
 import { displayRecommendations } from './helper';
 import * as path from 'path';
+import {rateLimit} from 'express-rate-limit';
 // import axios from 'axios';
 import * as fs from 'fs';
 import * as dotenv from 'dotenv';
@@ -33,13 +34,21 @@ app.set('view engine', 'ejs');
 
 app.use(express.static( 'public'));
 
+// Define a rate limiting middleware
+const limiter = rateLimit({
+    windowMs: 60 * 60 * 1000, // 1 hour
+    max: 15 // limit each IP to 15 requests per windowMs
+});
 
+// Apply the rate limiter to all requests
+app.use(limiter);
+
+// Handle requests to the root URL
 app.get('/', (req, res) => {
-
     const forwardedFor = req.headers['x-forwarded-for'];
     const ip = forwardedFor ? (forwardedFor as string).split(',')[0] : req.socket.remoteAddress;
     console.log(`Request from IP: ${ip}`);
-    // Read the titles.json file
+
     fs.readFile('titles.json', 'utf8', (err, data) => {
         if (err) {
             console.error('Error reading titles.json:', err);
@@ -47,10 +56,7 @@ app.get('/', (req, res) => {
             return;
         }
 
-        // Parse the JSON data
         const titlesData = JSON.parse(data);
-
-        // Render the EJS template and pass the titles dataset
         res.render('index', { titles: titlesData.titles });
     });
 });
