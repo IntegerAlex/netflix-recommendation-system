@@ -17,5 +17,5 @@ jobs:
         if: ${{ always() }}
         run: |
           mkdir -p lighthouse-reports
-          cp -r ${{ github.workspace }}/$GITHUB_RUN_ID/lhr-report.json lighthouse-reports/lhr-report.json
+          cp -r ${{ github.workspace }}/lhr-${GITHUB_RUN_ID}.json lighthouse-reports/lhr-report.json
         shell: bash
