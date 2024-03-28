@@ -13,3 +13,9 @@ jobs:
           budgetPath: .github/workflows/budget.json # test performance budgets
           uploadArtifacts: true # save results as an action artifacts
           temporaryPublicStorage: true # upload lighthouse report to the temporary storage
+      - name: Save Lighthouse Report
+        if: ${{ always() }}
+        run: |
+          mkdir -p lighthouse-reports
+          cp -r ${{ steps.lighthouse.outputs.artifacts }}/lhr-report.json lighthouse-reports/lhr-report.json
+        shell: bash
