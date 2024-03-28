@@ -1,6 +1,7 @@
 # Netflix Recommendation System
 [![DeepSource](https://app.deepsource.com/gh/IntegerAlex/netflix-recommendation-system.svg/?label=resolved+issues&show_trend=true&token=Wf2-GuVUSjTodDd2sMJ2zYrm)](https://app.deepsource.com/gh/IntegerAlex/netflix-recommendation-system/)
 [![CodeScene Code Health](https://codescene.io/projects/51785/status-badges/code-health)](https://codescene.io/projects/51785)
+![CodeQL](https://github.com/IntegerAlex/netflix-recommendation-system/workflows/CodeQL/badge.svg)
 
 This Netflix Recommendation System is a web application developed using Node.js and Express. It utilizes a recommendation engine written in Python to provide personalized Netflix recommendations based on user input. The system integrates with the OMDB API to fetch movie details and leverages a large dataset for accurate recommendations.
 
