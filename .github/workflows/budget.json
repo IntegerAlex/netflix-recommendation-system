@@ -1,15 +1,14 @@
-[
-    {
-      "path": "/*",
-      "resourceSizes": [
-        {
-          "resourceType": "document",
-          "budget": 18
-        },
-        {
-          "resourceType": "total",
-          "budget": 200
-        }
+{
+  "ci": {
+    "assert": {
+      "categories": {
+        "performance": ["error", {"minScore": 0.8}]
+      },
+      "audits": [
+        ["resource-summary.document.size", "error", {"maxNumericValue": 18432}],
+        ["resource-summary.total.size", "error", {"maxNumericValue": 204800}]
       ]
-    }
-  ]
+    },
+    "skipAudits": ["resource-summary.document.size", "resource-summary.total.size"]
+  }
+}
