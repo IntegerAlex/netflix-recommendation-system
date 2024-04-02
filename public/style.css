@@ -1,75 +1,81 @@
-
 body {
-    background-image: url('/public/Designertest.png'); /* Adjust the path to your background image */
-    background-size: cover; /* Cover the entire background */
-    background-position: center; /* Center the background image */
-    background-attachment: fixed; /* Fix the background image so it doesn't scroll with the content */
-    font-family: Arial, sans-serif; /* Set the font family */
+  background-image: url('/public/background.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-/* Custom CSS styles */
 .dropdown {
   position: relative;
   display: flex;
   justify-content: center;
-  margin: 100px auto; /* Center horizontally and add top margin */
-  width: 300px; 
+  margin: 100px auto;
+  width: 300px;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.8); /* Darken the background */
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Increase shadow for depth */
 }
 
 .search-input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box; /* Ensure that padding and border are included in the width */
-    font-size: 16px; /* Set the font size */
+  width: calc(100% - 20px); /* Adjust width to accommodate padding */
+  padding: 10px;
+  border: none; /* Remove border to match Netflix's style */
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 16px;
+  background-color: rgba(255, 255, 255, 0.9); /* Lighten input background */
+  color: #333; /* Darken text color */
 }
 
 .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    width: 100%;
-    z-index: 1;
-    max-height: 200px;
-    overflow-y: auto;
-    margin-top: 5px; /* Add some margin to separate from the input */
+  display: none;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.8); /* Dark background for dropdown */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  width: calc(100% - 20px); /* Adjust width to accommodate padding */
+  z-index: 1;
+  max-height: 200px;
+  overflow-y: auto;
+  margin-top: 5px;
 }
 
 .dropdown-content.show {
-    display: block;
+  display: block;
 }
 
 .dropdown-content a {
-    display: block;
-    padding: 10px;
-    text-decoration: none;
-    color: #333;
-    transition: background-color 0.3s;
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: #fff; /* Change text color to white */
+  transition: background-color 0.3s;
 }
 
 .dropdown-content a:hover {
-    background-color: #e9e9e9;
+  background-color: rgba(255, 255, 255, 0.1); /* Lighten background on hover */
 }
 
 .btn-recommend {
-  position:relative;
+  position: relative;
   display: flex;
   justify-content: center;
-  margin: 100px auto;
+  margin: 10px auto 20px; /* Adjust margin to bring the button closer to the input area */
   width: 300px;
-    padding: 10px;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  padding: 10px;
+  background-color: #e50914; /* Netflix red */
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .btn-recommend:hover {
-    background-color: #0056b3;
+  background-color: #b2070e; /* Darker red on hover */
 }
