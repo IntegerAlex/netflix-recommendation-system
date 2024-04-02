@@ -1,4 +1,5 @@
 # Netflix Recommendation System
+
 [![DeepSource](https://app.deepsource.com/gh/IntegerAlex/netflix-recommendation-system.svg/?label=resolved+issues&show_trend=true&token=Wf2-GuVUSjTodDd2sMJ2zYrm)](https://app.deepsource.com/gh/IntegerAlex/netflix-recommendation-system/)
 [![CodeScene Code Health](https://codescene.io/projects/51785/status-badges/code-health)](https://codescene.io/projects/51785)
 ![CodeQL](https://github.com/IntegerAlex/netflix-recommendation-system/workflows/CodeQL/badge.svg)
@@ -20,6 +21,23 @@ This Netflix Recommendation System is a web application developed using Node.js 
 - OMDB API: Integration with the OMDB API enables access to a vast database of movie information.
 
 ### Screenshots
+
+Here are some screenshots showcasing our application:
+
+- ![Home page](/screenshots/index.html.png)
+  Landing page
+
+- ![Loading screen](/screenshots/loading.png)
+ After Input wait for Loading
+
+- ![Recommendations](/screenshots/recommendations.png)
+  Recommedations generated after user input
+
+## Demo
+
+Here is a demo using the application
+
+![DEMO](/screenshots/demo.webm)
 
 ## Contributing
 
