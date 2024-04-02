@@ -37,7 +37,7 @@ Here are some screenshots showcasing our application:
 
 Here is a demo using the application
 
-[![DEMO](http://img.youtube.com/vi/013HnsjD75w/0.jpg)](http://www.youtube.com/watch?v=013HnsjD75w "DEMO")
+[![DEMO](/screenshots/yt.png)](http://www.youtube.com/watch?v=013HnsjD75w "DEMO")
 
 ## Contributing
 
