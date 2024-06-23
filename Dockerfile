@@ -23,11 +23,12 @@ COPY . .
 
 # TypeScript compilation (if needed)
 # Replace index.ts and helper.ts with your TypeScript files
-# RUN npx tsc index.ts helper.ts
+RUN npx tsc index.ts helper.ts
 
 # Create and activate Python virtual environment
 RUN python3 -m venv /venv
 ENV PATH="/venv/bin:$PATH"
+# RUN source ~/venv/bin
 
 # Install Python dependencies
 COPY requirements.txt ./
