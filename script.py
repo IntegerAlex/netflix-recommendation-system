@@ -18,12 +18,8 @@ def create_soup(x):
     return x['title'] + ' ' + x['director'] + ' ' + x['cast'] + ' ' + x['listed_in'] + ' ' + x['description']
 
 # Function to get movie recommendations
-def get_recommendations(movie_name, cosine_sim, netflix_data):
-    title = clean_data(movie_name)
-    if title not in indices:
-        return ["No recommendations available for the provided movie name."]
-    idx = indices[title]
-    sim_scores = list(enumerate(cosine_sim[idx]))
+def get_recommendations(cosine_sim, netflix_data):
+    sim_scores = list(enumerate(cosine_sim[0]))
     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
     sim_scores = sim_scores[1:9]  # Exclude the movie itself
     movie_indices = [i[0] for i in sim_scores]
@@ -31,7 +27,6 @@ def get_recommendations(movie_name, cosine_sim, netflix_data):
     return result
 
 if __name__ == "__main__":
-
 
     # Load data
     netflix_overall = pd.read_csv('netflix_titles.csv').fillna('')
@@ -47,23 +42,28 @@ if __name__ == "__main__":
     # Create a new DataFrame with the 'soup' column
     netflix_data = netflix_data.assign(soup=soup_df)
 
-    # Create CountVectorizer and calculate cosine similarity
-    count = CountVectorizer(stop_words='english')
-    count_matrix = count.fit_transform(netflix_data['soup'])
-    cosine_sim2 = cosine_similarity(count_matrix, count_matrix)
-
     # Reset index and create series for easy indexing
     netflix_data = netflix_data.reset_index()
     indices = pd.Series(netflix_data.index, index=netflix_data['title'])
+    title=clean_data(args.movie_name)
+    if title not in indices:
+        print(["No recommendations available for the provided movie name."])
+        exit(0)
+    movie_index=indices[title]
 
-    # Get movie recommendations and print
+    # Create CountVectorizer and calculate cosine similarity
+    count = CountVectorizer(stop_words='english')
+    count_matrix = count.fit_transform(netflix_data['soup'])
+    user_count_matrix= count_matrix[movie_index]
+    cosine_sim2 = cosine_similarity(user_count_matrix, count_matrix)
 
 
-def predict_movie(movie_name):
-    return get_recommendations(movie_name, cosine_sim2, netflix_data)
-
+# Get movie recommendations and print
+def predict_movie():
+    return get_recommendations(cosine_sim2, netflix_data)
 
 
 # test
-print(predict_movie(args.movie_name))
+print(predict_movie())
+
 
