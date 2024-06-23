@@ -21,18 +21,23 @@ RUN npm install --quiet --no-progress --no-fund --audit=false --unsafe-perm
 # Copy application files
 COPY . .
 
-# TypeScript compilation
-RUN npx tsc index.ts helper.ts
+# TypeScript compilation (if needed)
+# Replace index.ts and helper.ts with your TypeScript files
+# RUN npx tsc index.ts helper.ts
 
 # Create and activate Python virtual environment
 RUN python3 -m venv /venv
-RUN /venv/bin/pip install --no-cache-dir pandas scikit-learn
+ENV PATH="/venv/bin:$PATH"
 
-# Expose port
+# Install Python dependencies
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Expose port (if needed)
 EXPOSE 8080
 
-# Set environment variable
+# Set environment variable (if needed)
 ENV OMDB_API_KEY=
 
 # Command to start the Node.js application
-CMD ["/bin/bash", "-c", "source /venv/bin/activate && node index.js"]
+CMD ["node", "index.js"]
