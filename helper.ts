@@ -23,7 +23,7 @@ export async function recommendation(movieName: string): Promise<string[]> {
             if (stderr) {
                 console.error('Script error:');
                 console.error(stderr);
-                reject([]);
+                reject([stderr]);
             }
         });
     });
