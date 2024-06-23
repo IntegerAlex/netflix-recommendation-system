@@ -1,14 +1,15 @@
+# Use Node.js 20 with Debian Bookworm slim as the base image
 FROM node:20-bookworm-slim
+
 # Install dependencies for both Node.js and Python
 RUN apt-get update && \
-apt-get install -y \
-python3 \
-python3-venv \
-python3-dev \
-gcc \
-g++ \
-make \
-nodejs
+    apt-get install -y \
+    python3 \
+    python3-venv \
+    python3-dev \
+    gcc \
+    g++ \
+    make
 
 # Set working directory
 WORKDIR /app
@@ -25,9 +26,7 @@ RUN npx tsc index.ts helper.ts
 
 # Create and activate Python virtual environment
 RUN python3 -m venv /venv
-# Install Python dependencies
-RUN /bin/bash -c "source /venv/bin/activate \
-    && pip install --no-cache-dir pandas scikit-learn" 
+RUN /venv/bin/pip install --no-cache-dir pandas scikit-learn
 
 # Expose port
 EXPOSE 8080
@@ -36,4 +35,4 @@ EXPOSE 8080
 ENV OMDB_API_KEY=
 
 # Command to start the Node.js application
-CMD ["node", "index.js"]
+CMD ["/bin/bash", "-c", "source /venv/bin/activate && node index.js"]
