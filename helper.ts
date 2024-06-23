@@ -48,7 +48,7 @@ export async function displayRecommendations(moviesArray: string[]){
     }
 }
 async function searchMovie(movieName: string): Promise<MovieDetails> {
-    const omdbApiKey = Process.env.OMDB_API_KEY;
+    const omdbApiKey = process.env.OMDB_API_KEY;
     const encodedMovieName = encodeURIComponent(movieName);
 
     try {
