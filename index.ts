@@ -35,13 +35,13 @@ app.set('view engine', 'ejs');
 app.use(express.static( 'public'));
 
 // Define a rate limiting middleware
-const limiter = rateLimit({
-    windowMs: 60 * 60 * 1000, // 1 hour
-    max: 30 // limit each IP to 15 requests per windowMs
-});
+// const limiter = rateLimit({
+//     windowMs: 60 * 60 * 1000, // 1 hour
+//     max: 30 // limit each IP to 15 requests per windowMs
+// });
 
-// Apply the rate limiter to all requests
-app.use(limiter);
+// // Apply the rate limiter to all requests
+// app.use(limiter);
 
 // Handle requests to the root URL
 app.get('/', (req, res) => {
