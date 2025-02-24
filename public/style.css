@@ -191,3 +191,94 @@ footer {
     margin: 20px 0 30px;
     font-size: 1.1rem;
 }
+
+/* Info section styles */
+.info-section {
+    margin-top: 40px;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.info-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #2d3436;
+}
+
+.info-section p {
+    color: #636e72;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.info-link {
+    color: #0984e3;
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    transition: color 0.3s ease;
+}
+
+.info-link:hover {
+    color: #0870c0;
+}
+
+/* Footer styles update */
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer-links {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.github-link,
+.license-link {
+    color: #0984e3;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.github-link:hover,
+.license-link:hover {
+    color: #0870c0;
+}
+
+.separator {
+    color: #636e72;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .info-section {
+        margin-top: 30px;
+        padding: 20px;
+    }
+
+    .info-section h2 {
+        font-size: 1.3rem;
+    }
+
+    .footer-content {
+        padding: 15px;
+    }
+
+    .footer-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .separator {
+        display: none;
+    }
+}

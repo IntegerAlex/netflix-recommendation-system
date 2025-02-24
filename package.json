@@ -3,9 +3,11 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "build": "tsc",
-    "preview": "vite preview",
-    "dev": "tsc index.ts helper.ts && node index.js"
+    "copy-files": "node copyFiles.js",
+    "build": "tsc && npm run copy-files",
+    "dev": "npm run build && node dist/index.js",
+    "start": "node dist/index.js",
+    "watch": "tsc -w"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",

@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Express } from 'express';
 import { recommendation } from './helper';
 import { displayRecommendations } from './helper';
 import * as path from 'path';
@@ -12,7 +12,7 @@ dotenv.config();
 
 
 // import { title } from 'process';
-const app = express();
+const app: Express = express();
 
 /**
  * Serve static images from public directory

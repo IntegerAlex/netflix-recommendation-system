@@ -45,6 +45,7 @@ const PYTHON_PATH = getPythonPath();
 const scriptPath = path.join(__dirname, 'script.py');
 
 console.log(`Using Python path: ${PYTHON_PATH}`);
+console.log(`Script path: ${scriptPath}`);
 
 export async function recommendation(movieName: string): Promise<string[]> {
     return new Promise((resolve, reject) => {
