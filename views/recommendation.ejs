@@ -1,26 +1,75 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Recommendations</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/public/recommendation.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Recommendations</title>
+    <!-- Load styles and fonts -->
+    <link rel="stylesheet" href="/recommendation.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <% details.forEach(movie => { %>
-            <div class="card">
-                <img src="<%= movie.poster %>" alt="poster" class="poster">
-                <div class="content">
-                    <h2 class="title"><%= movie.title %></h2>
-                    <p class="info">Year: <%= movie.year %></p>
-                    <p class="info">Genre: <%= movie.genre %></p>
-                    <p class="info">Rating: <%= movie.rating %></p>
-                </div>
-            </div>
-        <% }); %>
+    <!-- Header with navigation -->
+    <div class="header">
+        <a href="/" class="back-button" aria-label="Back to search">← Back to Search</a>
+        <h1>Recommended Movies</h1>
     </div>
+
+    <!-- Main content container -->
+    <div class="container">
+        <div class="movies-grid">
+            <% /* Iterate through movie recommendations */ %>
+            <% details.forEach(movie => { %>
+                <div class="movie-card">
+                    <% /* Handle movie poster display */ %>
+                    <% if (movie.poster && movie.poster !== "N/A") { %>
+                        <div class="poster-container">
+                            <img src="<%= movie.poster %>" 
+                                 alt="<%= movie.title %> poster" 
+                                 class="poster"
+                                 loading="lazy">
+                        </div>
+                    <% } else { %>
+                        <div class="poster-placeholder">
+                            <span>No Poster Available</span>
+                        </div>
+                    <% } %>
+
+                    <!-- Movie details section -->
+                    <div class="content">
+                        <h2 class="title"><%= movie.title %></h2>
+                        <div class="info-grid">
+                            <% /* Show year if available */ %>
+                            <% if (movie.year) { %>
+                                <div class="info-item">
+                                    <span class="label">Year</span>
+                                    <span class="value"><%= movie.year %></span>
+                                </div>
+                            <% } %>
+                            <% /* Show genre if available */ %>
+                            <% if (movie.genre) { %>
+                                <div class="info-item">
+                                    <span class="label">Genre</span>
+                                    <span class="value"><%= movie.genre %></span>
+                                </div>
+                            <% } %>
+                            <% /* Show rating if available */ %>
+                            <% if (movie.rating) { %>
+                                <div class="info-item">
+                                    <span class="label">Rating</span>
+                                    <span class="value"><%= movie.rating %> ⭐</span>
+                                </div>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>Powered by AI Movie Recommendations</p>
+    </footer>
 </body>
 </html>

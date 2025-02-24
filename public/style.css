@@ -1,81 +1,193 @@
-body {
-  background-image: url('/public/background.png');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: #2d3436;
+}
+
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Typography */
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #2d3436;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: #636e72;
+    margin-bottom: 40px;
+}
+
+/* Search container */
+.search-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Dropdown styles */
 .dropdown {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  margin: 100px auto;
-  width: 300px;
-  padding: 20px;
-  background-color: rgba(0, 0, 0, 0.8); /* Darken the background */
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Increase shadow for depth */
+    position: relative;
+    margin-bottom: 20px;
 }
 
 .search-input {
-  width: calc(100% - 20px); /* Adjust width to accommodate padding */
-  padding: 10px;
-  border: none; /* Remove border to match Netflix's style */
-  border-radius: 5px;
-  box-sizing: border-box;
-  font-size: 16px;
-  background-color: rgba(255, 255, 255, 0.9); /* Lighten input background */
-  color: #333; /* Darken text color */
+    width: 100%;
+    padding: 15px 20px;
+    font-size: 1rem;
+    border: 2px solid #dfe6e9;
+    border-radius: 12px;
+    background-color: white;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #74b9ff;
+    box-shadow: 0 0 0 3px rgba(116, 185, 255, 0.2);
 }
 
 .dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: rgba(0, 0, 0, 0.8); /* Dark background for dropdown */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  border-radius: 5px;
-  width: calc(100% - 20px); /* Adjust width to accommodate padding */
-  z-index: 1;
-  max-height: 200px;
-  overflow-y: auto;
-  margin-top: 5px;
+    display: none;
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    right: 0;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 1000;
 }
 
 .dropdown-content.show {
-  display: block;
+    display: block;
 }
 
 .dropdown-content a {
-  display: block;
-  padding: 10px;
-  text-decoration: none;
-  color: #fff; /* Change text color to white */
-  transition: background-color 0.3s;
+    display: block;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: #2d3436;
+    transition: background-color 0.2s ease;
 }
 
 .dropdown-content a:hover {
-  background-color: rgba(255, 255, 255, 0.1); /* Lighten background on hover */
+    background-color: #f5f6fa;
+    color: #0984e3;
 }
 
+/* Button styles */
 .btn-recommend {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  margin: 10px auto 20px; /* Adjust margin to bring the button closer to the input area */
-  width: 300px;
-  padding: 10px;
-  background-color: #e50914; /* Netflix red */
-  border: none;
-  border-radius: 5px;
-  color: #fff;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+    background-color: #0984e3;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 12px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
 }
 
 .btn-recommend:hover {
-  background-color: #b2070e; /* Darker red on hover */
+    background-color: #0870c0;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(9, 132, 227, 0.3);
+}
+
+.btn-icon {
+    margin-left: 8px;
+    transition: transform 0.3s ease;
+}
+
+.btn-recommend:hover .btn-icon {
+    transform: translateX(4px);
+}
+
+/* Scrollbar styling */
+.dropdown-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.dropdown-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.dropdown-content::-webkit-scrollbar-thumb {
+    background: #cbd5e0;
+    border-radius: 4px;
+}
+
+.dropdown-content::-webkit-scrollbar-thumb:hover {
+    background: #a0aec0;
+}
+
+/* Footer */
+footer {
+    margin-top: auto;
+    padding: 20px;
+    text-align: center;
+    color: #636e72;
+    font-size: 0.9rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        margin: 20px auto;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    .search-input,
+    .btn-recommend {
+        padding: 12px 20px;
+    }
+}
+
+/* Error page styles */
+.error-container {
+    text-align: center;
+    padding: 40px 20px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 40px auto;
+    max-width: 600px;
+}
+
+.error-message {
+    color: #636e72;
+    margin: 20px 0 30px;
+    font-size: 1.1rem;
 }

@@ -1,24 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Searchable Dropdown</title>
-<link rel="stylesheet" href="/public/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Recommendations</title>
+    <!-- Load styles and fonts -->
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="container">
+        <h1>Movie Recommendations</h1>
+        <p class="subtitle">Find similar movies you'll love</p>
+        
+        <!-- Search container -->
+        <div class="search-container">
+            <!-- Movie search dropdown -->
+            <div class="dropdown">
+                <input type="text" 
+                       placeholder="Enter a movie name..." 
+                       class="search-input"
+                       autocomplete="off"
+                       aria-label="Search movies">
+                <!-- Dropdown content -->
+                <div class="dropdown-content">
+                    <% /* Populate dropdown with movie titles */ %>
+                    <% titles.forEach(function(title) { %>
+                        <a href="#" role="option"><%= title %></a>
+                    <% }); %>
+                </div>
+            </div>
+            <!-- Submit button -->
+            <button class="btn-recommend" id="recommend-btn">
+                Get Recommendations
+                <span class="btn-icon" aria-hidden="true">→</span>
+            </button>
+        </div>
+    </div>
 
-<div class="dropdown">
-  <input type="text" placeholder="Search.." class="search-input">
-  <div class="dropdown-content">
-    <% titles.forEach(function(title) { %>
-      <a href="#"><%= title %></a>
-    <% }); %>
-  </div>
-  
-</div>
-<button class="btn-recommend" id="recommend-btn">Recommend</button>
+    <!-- Footer -->
+    <footer>
+        <p>Powered by AI Movie Recommendations</p>
+    </footer>
 
+    <!-- Load JavaScript -->
+    <script src="/script.js"></script>
 </body>
-<script src="/public/script.js"></script>
 </html>
